@@ -20,20 +20,18 @@ export default {
 </script>
 <style lang="scss">
 @import url("https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css");
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,latin-ext,vietnamese");
 :root {
-  --font: "Roboto", sans-serif;
+  --font: "Nunito", sans-serif;
 
-  --blue: #0d47a1;
-  --blue-dark: #153d79;
-  --yelow: #f3c300;
-  --yelow-dark: #d5b01a;
-  --dark: #131416;
-  --darker: #1d2025;
-  --grey: #acadaf;
-  --grey-dark: #c6c7c8;
-  --light: #e6f0fe;
-  --lighter: #f5f9ff;
+  --green-l: #3dcc8e;
+  --green-m: #00c68e;
+  --green-d: #03b898;
+  --black-l: #4a4a4a;
+  --grey-l: #d6d6d6;
+  --light-l: #ffffff;
+  --gradient: linear-gradient(96.83deg, #3dcc8e -7.74%, #03b898 124.61%);
+  --shadow: 0px 1px 5px 0px rgba(74, 74, 74, 0.3);
 }
 * {
   margin: 0;
@@ -69,8 +67,9 @@ img {
   max-width: 100%;
 }
 body {
-  background-color: var(--lighter);
+  background-color: var(--light);
   font-family: var(--font);
+  color: var(--black-l);
 }
 /* Estilos Globais */
 #app {
@@ -86,14 +85,15 @@ body {
   margin: 0 auto;
 }
 .btn {
-  color: var(--lighter);
+  color: var(--light-l);
   text-transform: uppercase;
-  background: linear-gradient(103.64deg, #0d47a1 0%, #153d79 122.64%);
+  background: var(--gradient);
   border: none;
-  padding: 16px 32px;
-  border-radius: 7px;
+  padding: 16px 48px;
+  border-radius: 3px;
   font-weight: bold;
   cursor: pointer;
+  font-family: var(--font);
   transition: 0.2s ease;
   &:hover {
     transition: 0.2s ease;

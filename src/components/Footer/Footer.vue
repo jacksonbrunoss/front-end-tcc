@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <p>© Adottte 2020 - Alguns direitos reservados.</p>
+    <p>Copyright © 2020 Helpets. Alguns direitos reservados.</p>
   </footer>
 </template>
 
@@ -14,13 +14,13 @@ export default {
 .footer {
   width: 100%;
   padding: 0px 16px;
-  background-color: var(--blue);
+  background-color: var(--green-l);
   position: relative;
   top: 75px;
 }
 .footer p {
   text-align: center;
   padding: 24px 0px;
-  color: var(--lighter);
+  color: var(--light-l);
 }
 </style>

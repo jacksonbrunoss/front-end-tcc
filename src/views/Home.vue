@@ -4,7 +4,10 @@
       <div class="container">
         <div class="content">
           <div class="hero">
-            <h1 class="title">Encontre seu novo amigo</h1>
+            <h1 class="title">Bem-vindo à Helpets.</h1>
+            <p
+              class="subtitle"
+            >Nosso site está cheio de peludos ansiosos pra ter uma família. Tente diferentes buscas até encontrar um peludo pra chamar de seu.</p>
             <SearchAnimals />
           </div>
         </div>
@@ -29,13 +32,10 @@ export default {
 <style lang="scss" scoped>
 .header {
   width: 100%;
-  background: url("../assets/bg-header.jpg");
-  object-fit: cover;
-  background-position: center;
 }
 .content {
   width: 100%;
-  height: 350px;
+  height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +43,20 @@ export default {
 .hero {
   > .title {
     font-size: 2rem;
-    color: var(--lighter);
+    color: var(--green-l);
+    font-weight: 900;
+    font-size: 3.5rem;
+    text-align: center;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 72px 0px 16px 0px;
+  }
+  > .subtitle {
+    max-width: 679px;
+    text-align: center;
+    line-height: 24px;
+    margin-bottom: 16px;
   }
 }
 </style>
