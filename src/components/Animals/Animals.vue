@@ -1,26 +1,31 @@
 <template>
-  <div class="card-animals">
-    <div class="img-card">
-      <img v-if="img" :src="img" :alt="nome" />
-      <img v-else src="@/assets/pic.jpg" alt="Ouve algum erro com essa imagem." />
-    </div>
-    <div class="info">
-      <h3>{{nome}}</h3>
-      <div class="sub-info">
-        <div class="port-box">
-          <div class="port" :class="{activep}">P</div>
-          <div class="port" :class="{activem}">M</div>
-          <div class="port" :class="{activeg}">G</div>
-        </div>
-        {{activep}}
-        <span>
-          <i v-if="sexo === 'Macho'" class="bx bx-male-sign"></i>
-          <i v-else class="bx bx-female-sign"></i>
-        </span>
+  <router-link to="/">
+    <div class="card-animals">
+      <div class="img-card">
+        <img v-if="img" :src="img" :alt="nome" />
+        <img
+          v-else
+          src="@/assets/pic.jpg"
+          alt="Ouve algum erro com essa imagem."
+        />
       </div>
+      <div class="info">
+        <h3>{{ nome }}</h3>
+        <div class="sub-info">
+          <div class="port-box">
+            <div class="port" :class="{ activep }">P</div>
+            <div class="port" :class="{ activem }">M</div>
+            <div class="port" :class="{ activeg }">G</div>
+          </div>
+          <span>
+            <i v-if="sexo === 'Macho'" class="bx bx-male-sign"></i>
+            <i v-else class="bx bx-female-sign"></i>
+          </span>
+        </div>
+      </div>
+      <div class="local">{{ cidade }}/{{ estado }}</div>
     </div>
-    <div class="local">{{cidade}}/{{estado}}</div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -33,15 +38,15 @@ export default {
       activem: false,
       activeg: false,
       cidade: "",
-      estado: ""
+      estado: "",
     };
   },
   methods: {
     GetUsers() {
       const id = this.id_users;
       fetch(`http://localhost:3000/users/${id}`)
-        .then(res => res.json())
-        .then(res => {
+        .then((res) => res.json())
+        .then((res) => {
           this.cidade = res.cidade;
           this.estado = res.estado;
         });
@@ -51,12 +56,12 @@ export default {
       port === "p" ? (this.activep = true) : (this.activep = false);
       port === "m" ? (this.activem = true) : (this.activem = false);
       port === "g" ? (this.activeg = true) : (this.activeg = false);
-    }
+    },
   },
   created() {
     this.GetUsers();
     this.setColor();
-  }
+  },
 };
 </script>
 
@@ -90,6 +95,7 @@ export default {
   }
   > .local {
     padding: 8px 8px;
+    color: var(--black-l);
   }
   transition: 0.2s ease;
   &:hover {

@@ -1,7 +1,14 @@
 <template>
-  <form>
+  <form @submit.prevent="searchAnimals">
     <div class="input-box">
-      <input type="text" class="input" placeholder="Pesquise por um novo amiguinho..." />
+      <input
+        type="text"
+        class="input"
+        name="search"
+        id="search"
+        v-model="search"
+        placeholder="Pesquise por um novo amiguinho..."
+      />
       <button class="btn-input">
         <i class="bx bx-search"></i>
       </button>
@@ -12,7 +19,17 @@
 
 <script>
 export default {
-  name: "SearchAnimals"
+  name: "SearchAnimals",
+  data() {
+    return {
+      search: "",
+    };
+  },
+  methods: {
+    searchAnimals() {
+      this.$router.push({ query: { q: this.search } });
+    },
+  },
 };
 </script>
 
