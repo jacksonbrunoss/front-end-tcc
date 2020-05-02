@@ -50,7 +50,7 @@ export default {
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 72px 0px 16px 0px;
+    margin: 16px 0px 16px 0px;
   }
   > .subtitle {
     max-width: 679px;

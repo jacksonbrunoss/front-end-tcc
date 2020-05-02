@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import AnimalPage from "../views/AnimalPage.vue";
 
 Vue.use(VueRouter);
 
@@ -16,12 +17,21 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/animal/:id",
+    name: "AnimalPage",
+    props: true,
+    component: AnimalPage,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior() {
+    return window.scrollTo({ top: 0, behavior: "smooth" });
+  },
 });
 
 export default router;

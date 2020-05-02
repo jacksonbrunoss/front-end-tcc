@@ -2,25 +2,31 @@
   <section class="list-animals">
     <div class="container">
       <div class="content">
-        <div v-if="animals && animals.length">
-          <div class="content-animals">
-            <Animals
-              v-for="animal in animals"
-              :key="animal.id"
-              :nome="animal.nome"
-              :img="animal.images.url"
-              :sexo="animal.sexo"
-              :id_users="animal.id_users"
-              :port="animal.porte"
-            />
+        <transition mode="out-in">
+          <div v-if="animals && animals.length" key="loop">
+            <div class="content-animals">
+              <Animals
+                v-for="animal in animals"
+                :key="animal.id"
+                :id="animal.id"
+                :nome="animal.nome"
+                :img="animal.images.url"
+                :sexo="animal.sexo"
+                :id_users="animal.id_users"
+                :port="animal.porte"
+              />
+            </div>
+            <div>
+              <Pagination :animalsTotal="animalsTotal" :limit="limit" />
+            </div>
           </div>
-          <div>
-            <Pagination :animalsTotal="animalsTotal" :limit="limit" />
+          <div v-else-if="animals && animals.length === 0" key="not">
+            <p class="not">Busca sem resultados. Tente buscar outro termo.</p>
           </div>
-        </div>
-        <div v-else-if="animals && animals.length === 0">
-          <p class="not">Busca sem resultados. Tente buscar outro termo.</p>
-        </div>
+          <div v-else key="load">
+            <Loading />
+          </div>
+        </transition>
       </div>
     </div>
   </section>
@@ -49,6 +55,7 @@ export default {
   },
   methods: {
     GetAnimals() {
+      this.animals = null;
       api.get(this.url).then(res => {
         this.animalsTotal = Number(res.headers["x-total-count"]);
         this.animals = res.data;

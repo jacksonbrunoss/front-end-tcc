@@ -1,13 +1,9 @@
 <template>
-  <router-link to="/">
+  <router-link :to="{name: 'AnimalPage', params: {id: id} }">
     <div class="card-animals">
       <div class="img-card">
         <img v-if="img" :src="img" :alt="nome" />
-        <img
-          v-else
-          src="@/assets/pic.jpg"
-          alt="Ouve algum erro com essa imagem."
-        />
+        <img v-else src="@/assets/pic.jpg" alt="Ouve algum erro com essa imagem." />
       </div>
       <div class="info">
         <h3>{{ nome }}</h3>
@@ -29,39 +25,38 @@
 </template>
 
 <script>
+import { api } from "@/services/services.js";
 export default {
   name: "Animals",
-  props: ["img", "nome", "sexo", "id_users", "port"],
+  props: ["img", "nome", "sexo", "id_users", "port", "id"],
   data() {
     return {
       activep: false,
       activem: false,
       activeg: false,
       cidade: "",
-      estado: "",
+      estado: ""
     };
   },
   methods: {
     GetUsers() {
       const id = this.id_users;
-      fetch(`http://localhost:3000/users/${id}`)
-        .then((res) => res.json())
-        .then((res) => {
-          this.cidade = res.cidade;
-          this.estado = res.estado;
-        });
+      api.get(`/users/${id}`).then(res => {
+        this.cidade = res.data.cidade;
+        this.estado = res.data.estado;
+      });
     },
     setColor() {
       const port = this.port;
-      port === "p" ? (this.activep = true) : (this.activep = false);
-      port === "m" ? (this.activem = true) : (this.activem = false);
-      port === "g" ? (this.activeg = true) : (this.activeg = false);
-    },
+      port === "pequeno" ? (this.activep = true) : (this.activep = false);
+      port === "medio" ? (this.activem = true) : (this.activem = false);
+      port === "grande" ? (this.activeg = true) : (this.activeg = false);
+    }
   },
   created() {
     this.GetUsers();
     this.setColor();
-  },
+  }
 };
 </script>
 
@@ -86,7 +81,7 @@ export default {
       color: var(--blue);
       margin: 8px 0px;
       background: var(--gradient);
-      -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
       text-transform: uppercase;

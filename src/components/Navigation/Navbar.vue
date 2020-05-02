@@ -3,10 +3,12 @@
     <div class="container">
       <div class="content">
         <div class="brand-box">
-          <img
-            src="@/assets/brand.svg"
-            alt="ADOTTTE - Plataforma para adoção de animais domésticos."
-          />
+          <router-link to="/">
+            <img
+              src="@/assets/brand.svg"
+              alt="ADOTTTE - Plataforma para adoção de animais domésticos."
+            />
+          </router-link>
         </div>
         <div class="menu">
           <ul>
