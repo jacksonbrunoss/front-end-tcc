@@ -2,7 +2,9 @@
   <div id="app">
     <Navbar />
     <main class="main">
-      <router-view />
+      <transition mode="out-in">
+        <router-view />
+      </transition>
     </main>
     <Footer />
   </div>
@@ -78,7 +80,7 @@ body {
   min-height: 100vh;
 }
 .main {
-  padding-top: 100px;
+  padding-top: 70px;
   flex: 1;
 }
 .container {
@@ -90,7 +92,7 @@ body {
   text-transform: uppercase;
   background: var(--gradient);
   border: none;
-  padding: 16px 48px;
+  padding: 14px 48px;
   border-radius: 3px;
   font-weight: bold;
   cursor: pointer;
@@ -99,6 +101,16 @@ body {
   &:hover {
     transition: 0.2s ease;
     transform: scale(1.1);
+  }
+}
+.input-form {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid var(--green-d);
+  padding: 14px 16px;
+  &::placeholder {
+    color: var(--green-d);
   }
 }
 .v-enter,

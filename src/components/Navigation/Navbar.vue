@@ -22,7 +22,7 @@
               <router-link v-if="user" to="/">
                 <i class="bx bx-power-off"></i>
               </router-link>
-              <router-link v-else class="login-link" to="/">Login</router-link>
+              <router-link v-else class="login-link" to="/login">Login</router-link>
             </div>
             <router-link class="btn" tag="button" to>Cadastre-se</router-link>
           </ul>
@@ -53,10 +53,11 @@ export default {
 }
 .content {
   width: 100%;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
+  // padding: 10px 16px;
 }
 .brand-box img {
   width: 100px;
