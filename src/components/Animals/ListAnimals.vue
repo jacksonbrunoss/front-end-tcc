@@ -8,12 +8,14 @@
               <Animals
                 v-for="animal in animals"
                 :key="animal.id"
-                :id="animal.id"
+                :id="animal.id_animal"
                 :nome="animal.nome"
-                :img="animal.images.url"
+                :img="animal.imagem_animal"
                 :sexo="animal.sexo"
                 :id_users="animal.id_users"
-                :port="animal.porte"
+                :tamanho="animal.tamanho"
+                :cidade="animal.cidade"
+                :estado="animal.estado"
               />
             </div>
             <div>
@@ -43,7 +45,7 @@ export default {
   data() {
     return {
       animals: null,
-      limit: 12,
+      limit: 4,
       animalsTotal: 0
     };
   },
@@ -57,8 +59,8 @@ export default {
     GetAnimals() {
       this.animals = null;
       api.get(this.url).then(res => {
-        this.animalsTotal = Number(res.headers["x-total-count"]);
-        this.animals = res.data;
+        this.animals = res.data.animals;
+        console.log(this.animals);
       });
     }
   },

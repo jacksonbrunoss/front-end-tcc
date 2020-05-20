@@ -19,12 +19,13 @@
               <router-link to="/about">Sobre</router-link>
             </li>
             <div class="btn-login">
-              <router-link v-if="user" to="/">
+              <router-link v-if="$store.state.login" to="/">
                 <i class="bx bx-power-off"></i>
               </router-link>
               <router-link v-else class="login-link" to="/login">Login</router-link>
             </div>
-            <router-link class="btn" tag="button" to>Cadastre-se</router-link>
+            <router-link v-if="$store.state.login" class="btn" tag="button" to="/">Olá, {{name}}</router-link>
+            <router-link v-else class="btn" tag="button" to>Cadastre-se</router-link>
           </ul>
         </div>
       </div>
@@ -37,8 +38,13 @@ export default {
   name: "Navbar",
   data() {
     return {
-      user: false
+
     };
+  },
+  computed: {
+    name() {
+      return this.$store.state.user.nome.replace(/ .*/, "");
+    }
   }
 };
 </script>

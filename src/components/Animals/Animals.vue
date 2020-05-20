@@ -2,59 +2,57 @@
   <router-link :to="{name: 'AnimalPage', params: {id: id} }">
     <div class="card-animals">
       <div class="img-card">
-        <img v-if="img" :src="img" :alt="nome" />
-        <img v-else src="@/assets/pic.jpg" alt="Ouve algum erro com essa imagem." />
+        <img v-if="img == null" src="@/assets/pic.jpg" alt="Ouve algum erro com essa imagem." />
+        <img v-else :src="`http://localhost:3030/${img}`" :alt="nome" />
       </div>
       <div class="info">
         <h3>{{ nome }}</h3>
         <div class="sub-info">
           <div class="port-box">
-            <div class="port" :class="{ activep }">P</div>
-            <div class="port" :class="{ activem }">M</div>
-            <div class="port" :class="{ activeg }">G</div>
+            <div class="tamanho" :class="{ activep }">P</div>
+            <div class="tamanho" :class="{ activem }">M</div>
+            <div class="tamanho" :class="{ activeg }">G</div>
           </div>
           <span>
-            <i v-if="sexo === 'Macho'" class="bx bx-male-sign"></i>
+            <i v-if="sexo === 'macho'" class="bx bx-male-sign"></i>
             <i v-else class="bx bx-female-sign"></i>
           </span>
         </div>
       </div>
-      <div class="local">{{ cidade }}/{{ estado }}</div>
+      <div class="local">{{cidade}}/{{estado}}</div>
     </div>
   </router-link>
 </template>
 
 <script>
-import { api } from "@/services/services.js";
 export default {
   name: "Animals",
-  props: ["img", "nome", "sexo", "id_users", "port", "id"],
+  props: [
+    "img",
+    "nome",
+    "sexo",
+    "id_users",
+    "tamanho",
+    "id",
+    "cidade",
+    "estado"
+  ],
   data() {
     return {
       activep: false,
       activem: false,
-      activeg: false,
-      cidade: "",
-      estado: ""
+      activeg: false
     };
   },
   methods: {
-    GetUsers() {
-      const id = this.id_users;
-      api.get(`/users/${id}`).then(res => {
-        this.cidade = res.data.cidade;
-        this.estado = res.data.estado;
-      });
-    },
     setColor() {
-      const port = this.port;
-      port === "pequeno" ? (this.activep = true) : (this.activep = false);
-      port === "medio" ? (this.activem = true) : (this.activem = false);
-      port === "grande" ? (this.activeg = true) : (this.activeg = false);
+      const tamanho = this.tamanho;
+      tamanho === "pequeno" ? (this.activep = true) : (this.activep = false);
+      tamanho === "medio" ? (this.activem = true) : (this.activem = false);
+      tamanho === "grande" ? (this.activeg = true) : (this.activeg = false);
     }
   },
   created() {
-    this.GetUsers();
     this.setColor();
   }
 };
@@ -116,7 +114,7 @@ export default {
 }
 .port-box {
   display: flex;
-  > .port {
+  > .tamanho {
     border-radius: 3px;
     margin: 0px 8px 0px 0px;
     width: 30px;

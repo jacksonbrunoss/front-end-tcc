@@ -4,7 +4,7 @@
       <div v-if="animalsId" class="content">
         <div class="avatar-box">
           <div class="avatar">
-            <img :src="animalsId.images.url" :alt="animalsId.nome" />
+            <img :src="`http://localhost:3030/${animalsId.imagem_animal}`" :alt="animalsId.nome" />
           </div>
         </div>
         <div class="info-box">
@@ -25,7 +25,7 @@
               </li>
               <li>
                 <b>Tamanho:</b>
-                {{animalsId.porte}}
+                {{animalsId.tamanho}}
               </li>
               <li>
                 <b>
@@ -44,7 +44,8 @@
             </ul>
             <div class="info-user">
               <h3>Cadastrado por:</h3>
-              {{usersId}}
+              {{animalsId.usuario.nome}}
+              <a target="_black" :href="urlLink">Link</a>
             </div>
           </div>
         </div>
@@ -61,20 +62,21 @@ export default {
   props: ["id"],
   data() {
     return {
-      usersId: null,
       animalsId: null
     };
   },
+  computed: {
+    urlLink() {
+      return `https://api.whatsapp.com/send?phone=${this.animalsId.usuario.telefone}&text=Olá,%20meu%20amigo!`;
+    }
+  },
   methods: {
-    getUserId() {
-      api.get(`/users/${this.animalsId.id_users}`).then(res => {
-        this.usersId = res.data;
-      });
-    },
     getAnimalsId() {
       const id_animals = this.id;
+      console.log(id_animals);
       api.get(`/animals/${id_animals}`).then(res => {
-        this.animalsId = res.data;
+        console.log(res.data);
+        this.animalsId = res.data.animal;
       });
     }
   },
@@ -90,6 +92,7 @@ export default {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 32px;
+  padding: 32px 0px 0px 0px;
 }
 .avatar-box {
   width: 100%;

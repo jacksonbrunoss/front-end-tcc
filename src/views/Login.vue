@@ -4,12 +4,26 @@
       <div class="content">
         <div class="login">
           <h2>Login</h2>
-          <form>
+          <form @submit.prevent="logIn">
             <div class="textfield">
-              <input placeholder="E-mail" class="input-form" type="email" name="email" id="email" />
+              <input
+                placeholder="E-mail"
+                class="input-form"
+                type="email"
+                name="email"
+                id="email"
+                v-model="login.email"
+              />
             </div>
             <div class="textfield">
-              <input placeholder="Senha" class="input-form" type="password" name="pass" id="pass" />
+              <input
+                placeholder="Senha"
+                class="input-form"
+                type="password"
+                name="password"
+                id="password"
+                v-model="login.password"
+              />
             </div>
             <input class="btn btn-input" type="submit" value="Entrar" />
           </form>
@@ -25,7 +39,20 @@
 
 <script>
 export default {
-  name: "Login"
+  name: "Login",
+  data() {
+    return {
+      login: {
+        email: "",
+        password: ""
+      }
+    };
+  },
+  methods: {
+    logIn() {
+      this.$store.dispatch("getUsers", this.login.email);
+    }
+  }
 };
 </script>
 
